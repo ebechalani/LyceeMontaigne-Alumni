@@ -557,7 +557,20 @@ const UNI_DOMAINS = {
   "AUB (Chypre)":                   "aub.edu.lb",
 };
 
-function logoSources(domain) {
+// Direct high-quality logo overrides for specific universities
+const LOGO_DIRECT = {
+  "USJ":   "https://www.usj.edu.lb/logos/web_150/USJ.png",
+  "NDU":   "https://www.ndu.edu.lb/Assets/ContentPhotos/Photos/ndu_120235998.png",
+};
+
+function logoSources(uni, domain) {
+  if (LOGO_DIRECT[uni]) {
+    return [
+      LOGO_DIRECT[uni],
+      `https://logo.clearbit.com/${domain}`,
+      `https://www.google.com/s2/favicons?domain=${domain}&sz=128`,
+    ];
+  }
   return [
     `https://logo.clearbit.com/${domain}`,
     `https://www.google.com/s2/favicons?domain=${domain}&sz=128`,
@@ -688,9 +701,9 @@ function renderAlumni() {
     const av = initials(a.name);
     const yc = YEAR_COLORS[a.year] || "#c9a84c";
     const domain = UNI_DOMAINS[a.uni];
-    const srcs = domain ? JSON.stringify(logoSources(domain)) : null;
-    const avatarHtml = domain
-      ? `<img src="${logoSources(domain)[0]}" data-srcs='${srcs}' data-idx="0" class="uni-logo" alt="${a.uni}" /><span class="av-initials" style="display:none">${av}</span>`
+    const srcs = (domain || LOGO_DIRECT[a.uni]) ? JSON.stringify(logoSources(a.uni, domain)) : null;
+    const avatarHtml = srcs
+      ? `<img src="${logoSources(a.uni, domain)[0]}" data-srcs='${srcs}' data-idx="0" class="uni-logo" alt="${a.uni}" /><span class="av-initials" style="display:none">${av}</span>`
       : `<span class="av-initials">${av}</span>`;
     return `
     <div class="alumni-card fade-in">
