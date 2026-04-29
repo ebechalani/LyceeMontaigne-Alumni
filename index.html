@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lycée Montaigne — Alumni du Monde</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0a1628;
+      --navy2:  #0f2044;
+      --gold:   #c9a84c;
+      --gold2:  #e8c96e;
+      --white:  #f8f9fc;
+      --muted:  #94a3b8;
+      --card-bg:#111e35;
+      --border: rgba(201,168,76,.18);
+      --radius: 14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(10,22,40,.85);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 12px; }
+    .nav-logo svg { width: 34px; height: 34px; }
+    .nav-logo span { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--gold); }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: .88rem; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(201,168,76,.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(201,168,76,.12);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 6px 18px;
+      font-size: .78rem; font-weight: 600; letter-spacing: .08em;
+      color: var(--gold); text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4.8rem);
+      line-height: 1.1;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #ffffff 40%, var(--gold2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: 1.08rem; color: var(--muted); max-width: 560px; line-height: 1.7;
+      margin-bottom: 48px;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      color: var(--navy); font-weight: 700; font-size: .95rem;
+      padding: 14px 32px; border-radius: 100px;
+      text-decoration: none; transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 24px rgba(201,168,76,.35);
+    }
+    .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,168,76,.45); }
+
+    /* ── STATS ── */
+    .stats-section {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 1px; background: var(--border);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .stat-card {
+      background: var(--navy2);
+      padding: 40px 24px; text-align: center;
+    }
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem; font-weight: 700;
+      color: var(--gold); line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label { font-size: .82rem; color: var(--muted); font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
+
+    /* ── SECTION WRAPPER ── */
+    section { padding: 80px 48px; }
+    .section-header { text-align: center; margin-bottom: 56px; }
+    .section-tag {
+      display: inline-block;
+      font-size: .72rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      margin-bottom: 12px;
+    }
+    .section-sub { color: var(--muted); font-size: .95rem; max-width: 500px; margin: 0 auto; }
+
+    /* ── FILTERS ── */
+    #alumni { padding-top: 80px; }
+    .filter-bar {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      align-items: center; margin-bottom: 32px;
+    }
+    .search-wrap {
+      flex: 1; min-width: 220px;
+      position: relative;
+    }
+    .search-wrap svg {
+      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      color: var(--muted); width: 18px; height: 18px;
+    }
+    .search-input {
+      width: 100%; padding: 11px 14px 11px 42px;
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 10px; color: var(--white);
+      font-family: inherit; font-size: .9rem;
+      outline: none; transition: border-color .2s;
+    }
+    .search-input::placeholder { color: var(--muted); }
+    .search-input:focus { border-color: var(--gold); }
+
+    .filter-group { display: flex; flex-wrap: wrap; gap: 8px; }
+    .filter-btn {
+      padding: 8px 18px; border-radius: 100px;
+      border: 1px solid var(--border);
+      background: transparent; color: var(--muted);
+      font-family: inherit; font-size: .82rem; font-weight: 500;
+      cursor: pointer; transition: all .2s;
+    }
+    .filter-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .filter-btn.active {
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      border-color: transparent; color: var(--navy); font-weight: 700;
+    }
+
+    .results-count {
+      font-size: .82rem; color: var(--muted); margin-bottom: 24px;
+    }
+    .results-count span { color: var(--gold); font-weight: 600; }
+
+    /* ── ALUMNI GRID ── */
+    .alumni-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .alumni-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      transition: transform .2s, border-color .2s, box-shadow .2s;
+      cursor: default;
+    }
+    .alumni-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(201,168,76,.45);
+      box-shadow: 0 12px 40px rgba(0,0,0,.35);
+    }
+    .card-top { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; }
+    .card-avatar {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: #ffffff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: .85rem; color: var(--navy);
+      flex-shrink: 0; letter-spacing: .02em;
+      overflow: hidden; border: 1px solid rgba(255,255,255,.12);
+    }
+    .card-avatar img {
+      width: 38px; height: 38px; object-fit: contain;
+      image-rendering: auto;
+    }
+    .card-avatar .av-initials {
+      display: flex; align-items: center; justify-content: center;
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, var(--gold), var(--navy2));
+      color: var(--navy); font-weight: 700; font-size: .85rem;
+    }
+    .card-name { font-weight: 600; font-size: .97rem; line-height: 1.3; margin-bottom: 3px; }
+    .card-uni { font-size: .8rem; color: var(--gold); font-weight: 500; }
+    .card-divider { height: 1px; background: var(--border); margin-bottom: 14px; }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      font-size: .72rem; font-weight: 500; padding: 3px 10px; border-radius: 100px;
+      background: rgba(255,255,255,.06); color: var(--muted);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .tag.country { background: rgba(201,168,76,.1); color: var(--gold2); border-color: rgba(201,168,76,.2); }
+    .tag.year { background: rgba(99,179,237,.08); color: #90cdf4; border-color: rgba(99,179,237,.15); }
+
+    /* ── MAP SECTION ── */
+    .regions-section { padding: 80px 48px; background: var(--navy2); }
+    .regions-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+      gap: 16px; margin-top: 48px;
+    }
+    .region-card {
+      background: var(--navy); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      text-align: center; cursor: pointer;
+      transition: all .2s;
+    }
+    .region-card:hover, .region-card.active-region {
+      border-color: var(--gold);
+      background: rgba(201,168,76,.07);
+    }
+    .region-flag { font-size: 2.4rem; margin-bottom: 10px; }
+    .region-name { font-weight: 600; font-size: .95rem; margin-bottom: 4px; }
+    .region-count { font-size: .82rem; color: var(--muted); }
+
+    /* ── FIELDS CHART ── */
+    .fields-section { padding: 80px 48px; }
+    .fields-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr));
+      gap: 12px; margin-top: 48px;
+    }
+    .field-row { display: flex; flex-direction: column; gap: 6px; }
+    .field-label { font-size: .84rem; font-weight: 500; display: flex; justify-content: space-between; }
+    .field-label span { color: var(--muted); }
+    .field-bar-bg { height: 6px; background: rgba(255,255,255,.08); border-radius: 3px; overflow: hidden; }
+    .field-bar { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold2)); border-radius: 3px; transition: width 1s ease; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 40px 48px;
+      border-top: 1px solid var(--border);
+      text-align: center; color: var(--muted); font-size: .82rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      section { padding: 60px 24px; }
+      .regions-section { padding: 60px 24px; }
+      .fields-section { padding: 60px 24px; }
+      .stats-section { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 500px) {
+      .stats-section { grid-template-columns: 1fr 1fr; }
+      .stat-number { font-size: 2.2rem; }
+    }
+
+    /* Fade-in animation */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity .5s ease, transform .5s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* No results */
+    .no-results {
+      grid-column: 1/-1; text-align: center;
+      padding: 60px 0; color: var(--muted);
+    }
+    .no-results svg { width: 48px; height: 48px; margin: 0 auto 16px; display: block; opacity: .4; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <svg viewBox="0 0 34 34" fill="none">
+      <circle cx="17" cy="17" r="16" stroke="#c9a84c" stroke-width="1.5"/>
+      <path d="M9 24L17 10L25 24" stroke="#c9a84c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M12 20H22" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <span>Lycée Montaigne</span>
+  </div>
+  <div class="nav-links">
+    <a href="#stats">Statistiques</a>
+    <a href="#regions">Régions</a>
+    <a href="#alumni">Alumni</a>
+    <a href="#fields">Domaines</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="5"/></svg>
+    Promotions 2022 – 2025
+  </div>
+  <h1>Du Lycée Montaigne<br/>aux universités du monde</h1>
+  <p>Découvrez où nos diplômés poursuivent leur parcours académique — des universités du Liban aux institutions les plus prestigieuses à l'international.</p>
+  <a href="#alumni" class="hero-cta">
+    Explorer les Alumni
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+  </a>
+</div>
+
+<!-- STATS -->
+<div class="stats-section" id="stats">
+  <div class="stat-card">
+    <div class="stat-number" data-target="107">0</div>
+    <div class="stat-label">Alumni suivis</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number" data-target="10">0</div>
+    <div class="stat-label">Pays représentés</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number" data-target="30">0</div>
+    <div class="stat-label">Universités</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number" data-target="4">0</div>
+    <div class="stat-label">Promotions</div>
+  </div>
+</div>
+
+<!-- REGIONS -->
+<div class="regions-section" id="regions">
+  <div class="section-header">
+    <div class="section-tag">Géographie</div>
+    <h2 class="section-title">Une présence mondiale</h2>
+    <p class="section-sub">Cliquez sur une région pour filtrer les alumni.</p>
+  </div>
+  <div class="regions-grid" id="regionsGrid"></div>
+</div>
+
+<!-- ALUMNI -->
+<section id="alumni">
+  <div class="section-header">
+    <div class="section-tag">Répertoire</div>
+    <h2 class="section-title">Nos Alumni</h2>
+    <p class="section-sub">Recherchez par nom, université, domaine ou utilisez les filtres.</p>
+  </div>
+
+  <div class="filter-bar">
+    <div class="search-wrap">
+      <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd"/></svg>
+      <input type="text" class="search-input" id="searchInput" placeholder="Rechercher un alumnus, une université…" />
+    </div>
+    <div class="filter-group" id="yearFilters"></div>
+    <div class="filter-group" id="countryFilters"></div>
+  </div>
+
+  <div class="results-count" id="resultsCount"></div>
+  <div class="alumni-grid" id="alumniGrid"></div>
+</section>
+
+<!-- FIELDS -->
+<div class="fields-section" id="fields">
+  <div class="section-header">
+    <div class="section-tag">Domaines d'études</div>
+    <h2 class="section-title">Diversité académique</h2>
+    <p class="section-sub">Les principaux domaines choisis par nos diplômés.</p>
+  </div>
+  <div class="fields-grid" id="fieldsGrid"></div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p style="margin-bottom:6px;font-family:'Playfair Display',serif;color:#c9a84c;font-size:1rem;">Lycée Montaigne</p>
+  <p>Suivi des alumni · Promotions 2022–2025</p>
+</footer>
+
+<script>
+const ALUMNI = [
+  // ── CANADA ──
+  { name:"Abou Haydar Yorgo",    uni:"McGill University",             field:"Ingénierie aérospatiale",                        country:"Canada",      year:2022 },
+  { name:"Sayeh Michele",         uni:"McGill University",             field:"Ingénierie",                                     country:"Canada",      year:2022 },
+  { name:"Fakhry Joseph",         uni:"Polytechnique Montréal",        field:"Ingénierie civile",                              country:"Canada",      year:2022 },
+  { name:"Peltekian Arine",       uni:"University of Waterloo",        field:"Ingénierie mécatronique et robotique",           country:"Canada",      year:2022 },
+  { name:"Abou Haydar Andréa",    uni:"McGill University",             field:"Droit",                                          country:"Canada",      year:2023 },
+  { name:"Jalbout Lelia",         uni:"Concordia University",          field:"Business",                                       country:"Canada",      year:2023 },
+  { name:"Peltekian Minas",       uni:"Concordia University",          field:"Business",                                       country:"Canada",      year:2023 },
+  { name:"Tchoupourian Chris",    uni:"Concordia University",          field:"Ingénierie industrielle",                        country:"Canada",      year:2024 },
+  { name:"Kamal Marc",            uni:"Concordia University",          field:"Ingénierie civile",                              country:"Canada",      year:2025 },
+  { name:"Selfani Samir",         uni:"Concordia University",          field:"Économie",                                       country:"Canada",      year:2025 },
+
+  // ── FRANCE ──
+  { name:"Abou Rahal Théa",       uni:"Université de Strasbourg",      field:"Biologie moléculaire",                           country:"France",      year:2022 },
+  { name:"Maroun Rebecca",        uni:"Léonard de Vinci (ESILV)",      field:"Ingénierie informatique et communications",      country:"France",      year:2022 },
+  { name:"Dabar Robert",          uni:"KEDGE Business School",         field:"Commerce et management",                         country:"France",      year:2023 },
+  { name:"Moutran Nicolas",       uni:"Sorbonne Paris Nord",           field:"Gestion et management",                          country:"France",      year:2023 },
+  { name:"Azar Elio",             uni:"École Ferrières",               field:"Hospitality management",                         country:"France",      year:2023 },
+  { name:"Sassine Daniel",        uni:"Université de Toulon",          field:"Licence STAPS",                                  country:"France",      year:2023 },
+  { name:"Tauk Gabrielle",        uni:"IESEG School of Management",    field:"Management",                                     country:"France",      year:2023 },
+  { name:"Tohmé Enzo",            uni:"Paris 1 Panthéon-Sorbonne",     field:"Administration et échanges internationaux",      country:"France",      year:2023 },
+  { name:"Bou Debs Lynn",         uni:"Université Jean Moulin Lyon 3", field:"Droit-finance",                                  country:"France",      year:2024 },
+  { name:"Gemayel Carl",          uni:"Université Paul Valéry",        field:"Audiovisuel",                                    country:"France",      year:2024 },
+  { name:"Azar Maxime",           uni:"IPESUP",                        field:"Classe préparatoire scientifique MPSI",          country:"France",      year:2024 },
+  { name:"Lattouf Alex",          uni:"Université de Montpellier",     field:"Sciences de la vie et de l'environnement",       country:"France",      year:2024 },
+  { name:"Maroun Raphaelle",      uni:"LISAA",                         field:"Architecture",                                   country:"France",      year:2024 },
+  { name:"Mazraani Kelly",        uni:"Université de Montpellier",     field:"Gestion",                                        country:"France",      year:2024 },
+  { name:"Saba Mattias",          uni:"Lycée Militaire d'Autun",       field:"Classe préparatoire scientifique MPSI",          country:"France",      year:2024 },
+  { name:"Tauk Michaelle",        uni:"ESSEC Business School",         field:"Management",                                     country:"France",      year:2025 },
+
+  // ── LIBAN ──
+  { name:"Beyrouthy Dia",         uni:"USJ",                           field:"Sciences de la vie et de la terre - Biochimie",  country:"Liban",       year:2022 },
+  { name:"Bejjani Marc-Antoine",  uni:"USEK",                          field:"Business",                                       country:"Liban",       year:2022 },
+  { name:"Bou Chacra Anthony-Joe",uni:"USJ",                           field:"Computer Science",                               country:"Liban",       year:2022 },
+  { name:"Dib Rebecca",           uni:"NDU",                           field:"Environmental health",                           country:"Liban",       year:2022 },
+  { name:"Ghandour Hayfa",        uni:"USEK",                          field:"Éducation",                                      country:"Liban",       year:2022 },
+  { name:"Kabakian Christopher",  uni:"USJ",                           field:"Médecine dentaire",                              country:"Liban",       year:2022 },
+  { name:"Feghali Reem",          uni:"AUB",                           field:"Sciences économiques",                           country:"Liban",       year:2022 },
+  { name:"Khoury Cyril",          uni:"USJ",                           field:"Marketing et publicité",                         country:"Liban",       year:2022 },
+  { name:"Labaky Jana",           uni:"AUB",                           field:"Histoire et littérature anglaise",               country:"Liban",       year:2022 },
+  { name:"Mehranian Caline",      uni:"AUB",                           field:"Marketing",                                      country:"Liban",       year:2022 },
+  { name:"Obeid Talaat",          uni:"AUB",                           field:"Médecine",                                       country:"Liban",       year:2022 },
+  { name:"Taoukjian Elissa",      uni:"LAU",                           field:"Sciences politiques et Relations Internationales",country:"Liban",      year:2022 },
+  { name:"Abboud Elias",          uni:"NDU",                           field:"Architecture",                                   country:"Liban",       year:2023 },
+  { name:"Akiki Joy",             uni:"AUB",                           field:"Médecine",                                       country:"Liban",       year:2023 },
+  { name:"Beyrouthy Farah",       uni:"ALBA",                          field:"Animation 3D",                                   country:"Liban",       year:2023 },
+  { name:"Hajj Boutros Mia",      uni:"USJ",                           field:"Marketing et publicité",                         country:"Liban",       year:2023 },
+  { name:"Keuchguerian Maria",    uni:"ESA",                           field:"Business administration",                        country:"Liban",       year:2023 },
+  { name:"Yammine Pio",           uni:"USJ",                           field:"Gestion et management",                          country:"Liban",       year:2023 },
+  { name:"Obeid Omar",            uni:"AUB",                           field:"Médecine",                                       country:"Liban",       year:2023 },
+  { name:"Khoury Elio",           uni:"USJ",                           field:"Ingénierie",                                     country:"Liban",       year:2023 },
+  { name:"Kurdy Edouard",         uni:"AUB",                           field:"Ingénierie",                                     country:"Liban",       year:2023 },
+  { name:"Khoury Anthony",        uni:"AUB",                           field:"Ingénierie informatique",                        country:"Liban",       year:2023 },
+  { name:"Abboud Nada",           uni:"USJ",                           field:"Orthophonie",                                    country:"Liban",       year:2024 },
+  { name:"Abdel Massih Yasmina",  uni:"ALBA",                          field:"Graphic design",                                 country:"Liban",       year:2024 },
+  { name:"Abou Rahal Antonio",    uni:"Sagesse University",            field:"Hôtellerie",                                     country:"Liban",       year:2024 },
+  { name:"Azar Agatha",           uni:"AUB",                           field:"Ingénierie chimique",                            country:"Liban",       year:2024 },
+  { name:"Azar Rosarita",         uni:"USJ",                           field:"Sciences infirmières",                           country:"Liban",       year:2024 },
+  { name:"Haddad Marc",           uni:"USJ",                           field:"Computer Science",                               country:"Liban",       year:2024 },
+  { name:"Habib Melanie",         uni:"ALBA",                          field:"Architecture",                                   country:"Liban",       year:2024 },
+  { name:"Gemayel Marilynn",      uni:"USEK",                          field:"Droit",                                          country:"Liban",       year:2024 },
+  { name:"Ghorayeb Sasha",        uni:"LAU",                           field:"Ingénierie industrielle",                        country:"Liban",       year:2024 },
+  { name:"Elias Maria",           uni:"USEK",                          field:"Médecine",                                       country:"Liban",       year:2024 },
+  { name:"Harb Rita",             uni:"Sagesse University",            field:"Droit",                                          country:"Liban",       year:2024 },
+  { name:"Haydamous Fay",         uni:"ALBA",                          field:"Graphic design",                                 country:"Liban",       year:2024 },
+  { name:"Hechaimé Nella",        uni:"LAU",                           field:"Gestion et management",                          country:"Liban",       year:2024 },
+  { name:"Helou Catalina",        uni:"NDU",                           field:"Entrepreneuriat",                                country:"Liban",       year:2024 },
+  { name:"Jelwan Rayan",          uni:"USJ",                           field:"Marketing et publicité",                         country:"Liban",       year:2024 },
+  { name:"Nassif Jean",           uni:"AUB",                           field:"Ingénierie mécanique",                           country:"Liban",       year:2024 },
+  { name:"Nasr Celena",           uni:"AUB",                           field:"Ingénierie informatique",                        country:"Liban",       year:2024 },
+  { name:"Moukarzel Joseph",      uni:"USJ",                           field:"Éducation physique",                             country:"Liban",       year:2024 },
+  { name:"Mchantaf Alisha",       uni:"LAU",                           field:"Relations internationales",                      country:"Liban",       year:2024 },
+  { name:"Nahal Anthony",         uni:"ESA",                           field:"Business administration",                        country:"Liban",       year:2024 },
+  { name:"Saber Gabriel",         uni:"AUB",                           field:"Ingénierie industrielle",                        country:"Liban",       year:2024 },
+  { name:"Saber Nawal",           uni:"Sagesse University",            field:"Droit",                                          country:"Liban",       year:2024 },
+  { name:"Samaha William",        uni:"LAU",                           field:"Médecine",                                       country:"Liban",       year:2024 },
+  { name:"Touma Tara",            uni:"USJ",                           field:"Business administration",                        country:"Liban",       year:2024 },
+  { name:"Wahab Jad",             uni:"USJ",                           field:"Gestion et management",                          country:"Liban",       year:2024 },
+  { name:"Younes Tia-Maria",      uni:"ESIB (USJ)",                    field:"Computer and Communication Engineering",         country:"Liban",       year:2024 },
+  { name:"Yahia Charbel",         uni:"ESA",                           field:"Business administration",                        country:"Liban",       year:2024 },
+  { name:"Yammine Francisco",     uni:"USJ",                           field:"Biochimie",                                      country:"Liban",       year:2024 },
+  { name:"Abboud Ronaldo",        uni:"NDU",                           field:"Ingénierie mécanique",                           country:"Liban",       year:2025 },
+  { name:"Abdallah Maximilien",   uni:"LAU",                           field:"Graphic design",                                 country:"Liban",       year:2025 },
+  { name:"Abou Abdallah Rhéa",    uni:"ESA",                           field:"Business",                                       country:"Liban",       year:2025 },
+  { name:"Abou El Nasr Julia",    uni:"Sagesse University",            field:"Droit",                                          country:"Liban",       year:2025 },
+  { name:"Abou Jaoudé Carlos",    uni:"NDU",                           field:"Ingénierie mécanique",                           country:"Liban",       year:2025 },
+  { name:"Chaaya Jean-Paul",      uni:"AUB",                           field:"Computer Science Engineering",                   country:"Liban",       year:2025 },
+  { name:"Azzi Kiera",            uni:"ESA",                           field:"Business",                                       country:"Liban",       year:2025 },
+  { name:"Afeiche Lynn",          uni:"ESA",                           field:"Business",                                       country:"Liban",       year:2025 },
+  { name:"Azouri Elio",           uni:"USEK",                          field:"Médecine",                                       country:"Liban",       year:2025 },
+  { name:"Achkar Alfred",         uni:"LAU",                           field:"Ingénierie industrielle",                        country:"Liban",       year:2025 },
+  { name:"Fakhoury Georgio",      uni:"ESA",                           field:"Business",                                       country:"Liban",       year:2025 },
+  { name:"Chidiac Théa",          uni:"SGBU",                          field:"Médecine",                                       country:"Liban",       year:2025 },
+  { name:"Daoud Laetitia",        uni:"LAU",                           field:"Ingénierie civile",                              country:"Liban",       year:2025 },
+  { name:"Frangieh Serena",       uni:"NDU",                           field:"Fashion design",                                 country:"Liban",       year:2025 },
+  { name:"Ghousoub Cynthia",      uni:"USJ",                           field:"Hospitality management ou droit",                country:"Liban",       year:2025 },
+  { name:"Mbarak Camille",        uni:"ALBA",                          field:"Architecture d'extérieur",                       country:"Liban",       year:2025 },
+  { name:"Mansour Andrea",        uni:"ESA",                           field:"Business",                                       country:"Liban",       year:2025 },
+  { name:"Kurdy Carelle",         uni:"AUB",                           field:"Business",                                       country:"Liban",       year:2025 },
+  { name:"Haddad Mila",           uni:"ESA",                           field:"Business",                                       country:"Liban",       year:2025 },
+  { name:"Maalouf Paul",          uni:"USJ",                           field:"Médecine",                                       country:"Liban",       year:2025 },
+  { name:"Mokhbat Karen",         uni:"AUB",                           field:"Économie",                                       country:"Liban",       year:2025 },
+  { name:"Mokhbat Sarah",         uni:"AUB",                           field:"Ingénierie industrielle",                        country:"Liban",       year:2025 },
+  { name:"Mouawad Princia",       uni:"AUB",                           field:"Architecture",                                   country:"Liban",       year:2025 },
+  { name:"Moukarzel Charbel",     uni:"AUB",                           field:"Computer and Communication Engineering",         country:"Liban",       year:2025 },
+  { name:"Nammour Sienna",        uni:"AUB",                           field:"Médias et communication",                        country:"Liban",       year:2025 },
+
+  // ── AUTRES ──
+  { name:"Fawaz Nicolas",         uni:"AUB",                           field:"Ingénierie industrielle",                        country:"Chypre",      year:2023 },
+  { name:"Achkar Massimo",        uni:"Queen Mary University",         field:"Finance et économie",                            country:"Royaume-Uni", year:2022 },
+  { name:"Achkar Ornella",        uni:"King's College London",         field:"Ingénierie générale",                            country:"Royaume-Uni", year:2025 },
+  { name:"Sahyoun Oliver",        uni:"Université (non précisée)",     field:"Gestion des entreprises",                        country:"Autriche",    year:2023 },
+  { name:"Ashi Leonardo",         uni:"Penn State University",         field:"Ingénierie mécanique",                           country:"États-Unis",  year:2024 },
+  { name:"Jabr Alma",             uni:"Carleton College",              field:"Médecine",                                       country:"États-Unis",  year:2025 },
+  { name:"Fawaz Alexis",          uni:"EPFL",                          field:"Ingénierie mécanique",                           country:"Suisse",      year:2024 },
+  { name:"Khoury Michael",        uni:"EPFL",                          field:"Ingénierie mécanique",                           country:"Suisse",      year:2024 },
+  { name:"Dahdah Marya",          uni:"Glion Institute",               field:"Hospitality management",                         country:"Suisse",      year:2025 },
+  { name:"Kozak Matteo",          uni:"Università di Parma",           field:"Architecture",                                   country:"Italie",      year:2024 },
+  { name:"Awad Carl",             uni:"St Andrew's University",        field:"Ingénierie mécanique",                           country:"Australie",   year:2025 },
+];
+
+// domain mapped per university — used to build logo URLs from multiple providers
+const UNI_DOMAINS = {
+  "McGill University":              "mcgill.ca",
+  "Polytechnique Montréal":         "polymtl.ca",
+  "University of Waterloo":         "uwaterloo.ca",
+  "Concordia University":           "concordia.ca",
+  "Université de Strasbourg":       "unistra.fr",
+  "Léonard de Vinci (ESILV)":       "devinci.fr",
+  "KEDGE Business School":          "kedge.edu",
+  "Sorbonne Paris Nord":            "univ-spn.fr",
+  "École Ferrières":                "ecole-ferrieres.com",
+  "Université de Toulon":           "univ-tln.fr",
+  "IESEG School of Management":     "ieseg.fr",
+  "Paris 1 Panthéon-Sorbonne":      "univ-paris1.fr",
+  "Université Jean Moulin Lyon 3":  "univ-lyon3.fr",
+  "Université Paul Valéry":         "univ-montp3.fr",
+  "IPESUP":                         "ipesup.fr",
+  "Université de Montpellier":      "umontpellier.fr",
+  "LISAA":                          "lisaa.com",
+  "Lycée Militaire d'Autun":        "defense.gouv.fr",
+  "ESSEC Business School":          "essec.edu",
+  "USJ":                            "usj.edu.lb",
+  "USEK":                           "usek.edu.lb",
+  "NDU":                            "ndu.edu.lb",
+  "AUB":                            "aub.edu.lb",
+  "LAU":                            "lau.edu.lb",
+  "ALBA":                           "alba.edu.lb",
+  "ESA":                            "esa.edu.lb",
+  "Sagesse University":             "sagesse.edu.lb",
+  "ESIB (USJ)":                     "usj.edu.lb",
+  "SGBU":                           "sgbu.edu.lb",
+  "Cyprus University":              "ucy.ac.cy",
+  "Queen Mary University":          "qmul.ac.uk",
+  "King's College London":          "kcl.ac.uk",
+  "Vienna University":              "wu.ac.at",
+  "Penn State University":          "psu.edu",
+  "Carleton College":               "carleton.edu",
+  "EPFL":                           "epfl.ch",
+  "Glion Institute":                "glion.edu",
+  "Università di Parma":            "unipr.it",
+  "St Andrew's University":         "st-andrews.ac.uk",
+};
+
+function logoSources(domain) {
+  return [
+    `https://logo.clearbit.com/${domain}`,
+    `https://www.google.com/s2/favicons?domain=${domain}&sz=128`,
+    `https://icons.duckduckgo.com/ip3/${domain}.ico`,
+  ];
+}
+
+const REGION_FLAGS = {
+  "Liban":"🇱🇧","Canada":"🇨🇦","France":"🇫🇷",
+  "Royaume-Uni":"🇬🇧","États-Unis":"🇺🇸","Suisse":"🇨🇭",
+  "Italie":"🇮🇹","Australie":"🇦🇺","Autriche":"🇦🇹","Chypre":"🇨🇾"
+};
+
+const YEAR_COLORS = {2022:"#60a5fa",2023:"#34d399",2024:"#f472b6",2025:"#a78bfa"};
+
+// ── State ──
+let activeCountry = "all";
+let activeYear    = "all";
+let searchQuery   = "";
+
+// ── Utils ──
+function initials(name) {
+  return name.split(" ").slice(0,2).map(w=>w[0]).join("").toUpperCase();
+}
+
+// ── Animate counters ──
+function animateCounter(el) {
+  const target = +el.dataset.target;
+  const duration = 1400;
+  const step = target / (duration / 16);
+  let current = 0;
+  const timer = setInterval(() => {
+    current = Math.min(current + step, target);
+    el.textContent = Math.floor(current) + (target > 10 ? "+" : "");
+    if (current >= target) clearInterval(timer);
+  }, 16);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { animateCounter(e.target); counterObserver.unobserve(e.target); }});
+}, { threshold: .5 });
+document.querySelectorAll(".stat-number").forEach(el => counterObserver.observe(el));
+
+// ── Fade-in observer ──
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); fadeObserver.unobserve(e.target); }});
+}, { threshold: .1, rootMargin:"0px 0px -40px 0px" });
+
+// ── Build regions grid ──
+function buildRegions() {
+  const counts = {};
+  ALUMNI.forEach(a => { counts[a.country] = (counts[a.country]||0)+1; });
+  const sorted = Object.entries(counts).sort((a,b)=>b[1]-a[1]);
+  const grid = document.getElementById("regionsGrid");
+  grid.innerHTML = sorted.map(([country, count]) => `
+    <div class="region-card fade-in" data-country="${country}" onclick="filterByCountry('${country}')">
+      <div class="region-flag">${REGION_FLAGS[country]||"🌍"}</div>
+      <div class="region-name">${country}</div>
+      <div class="region-count">${count} alumnus${count>1?"i":""}</div>
+    </div>
+  `).join("");
+  grid.querySelectorAll(".fade-in").forEach(el => fadeObserver.observe(el));
+}
+
+// ── Build year + country filters ──
+function buildFilters() {
+  const years = [...new Set(ALUMNI.map(a=>a.year))].sort();
+  const countries = [...new Set(ALUMNI.map(a=>a.country))].sort();
+
+  document.getElementById("yearFilters").innerHTML =
+    `<button class="filter-btn active" data-type="year" data-value="all" onclick="setFilter('year','all',this)">Toutes</button>` +
+    years.map(y=>`<button class="filter-btn" data-type="year" data-value="${y}" onclick="setFilter('year',${y},this)" style="--yc:${YEAR_COLORS[y]}">${y}</button>`).join("");
+
+  document.getElementById("countryFilters").innerHTML =
+    `<button class="filter-btn active" data-type="country" data-value="all" onclick="setFilter('country','all',this)">Tous</button>` +
+    countries.map(c=>`<button class="filter-btn" data-type="country" data-value="${c}" onclick="setFilter('country','${c}',this)">${REGION_FLAGS[c]||""} ${c}</button>`).join("");
+}
+
+function setFilter(type, value, btn) {
+  if (type==="year") { activeYear = value; document.querySelectorAll("[data-type='year']").forEach(b=>b.classList.remove("active")); }
+  else { activeCountry = value; document.querySelectorAll("[data-type='country']").forEach(b=>b.classList.remove("active")); }
+  btn.classList.add("active");
+  renderAlumni();
+  // sync region cards
+  document.querySelectorAll(".region-card").forEach(c=>{
+    c.classList.toggle("active-region", c.dataset.country===activeCountry);
+  });
+}
+
+function filterByCountry(country) {
+  activeCountry = (activeCountry===country) ? "all" : country;
+  document.querySelectorAll("[data-type='country']").forEach(b=>{
+    b.classList.toggle("active", b.dataset.value===activeCountry);
+  });
+  document.querySelectorAll(".region-card").forEach(c=>{
+    c.classList.toggle("active-region", c.dataset.country===activeCountry);
+  });
+  document.getElementById("alumni").scrollIntoView({behavior:"smooth"});
+  renderAlumni();
+}
+
+// ── Render alumni cards ──
+function getFiltered() {
+  const q = searchQuery.toLowerCase();
+  return ALUMNI.filter(a => {
+    const matchSearch = !q || a.name.toLowerCase().includes(q) || a.uni.toLowerCase().includes(q) || a.field.toLowerCase().includes(q);
+    const matchYear   = activeYear==="all" || a.year===+activeYear;
+    const matchCountry= activeCountry==="all" || a.country===activeCountry;
+    return matchSearch && matchYear && matchCountry;
+  });
+}
+
+function renderAlumni() {
+  const filtered = getFiltered();
+  const grid = document.getElementById("alumniGrid");
+  const count = document.getElementById("resultsCount");
+  count.innerHTML = `<span>${filtered.length}</span> alumnus${filtered.length!==1?"i":""} trouvé${filtered.length!==1?"s":""}`;
+
+  if (!filtered.length) {
+    grid.innerHTML = `<div class="no-results">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <p>Aucun résultat pour ces critères.</p>
+    </div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map(a => {
+    const av = initials(a.name);
+    const yc = YEAR_COLORS[a.year] || "#c9a84c";
+    const domain = UNI_DOMAINS[a.uni];
+    const srcs = domain ? JSON.stringify(logoSources(domain)) : null;
+    const avatarHtml = domain
+      ? `<img src="${logoSources(domain)[0]}" data-srcs='${srcs}' data-idx="0" class="uni-logo" alt="${a.uni}" /><span class="av-initials" style="display:none">${av}</span>`
+      : `<span class="av-initials">${av}</span>`;
+    return `
+    <div class="alumni-card fade-in">
+      <div class="card-top">
+        <div class="card-avatar">${avatarHtml}</div>
+        <div>
+          <div class="card-name">${a.name}</div>
+          <div class="card-uni">${a.uni}</div>
+        </div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="card-tags">
+        <span class="tag">${a.field}</span>
+        <span class="tag country">${REGION_FLAGS[a.country]||""} ${a.country}</span>
+        <span class="tag year" style="background:${yc}18;color:${yc};border-color:${yc}30">${a.year}</span>
+      </div>
+    </div>`;
+  }).join("");
+  grid.querySelectorAll(".fade-in").forEach(el => fadeObserver.observe(el));
+}
+
+// ── Build fields chart ──
+function buildFields() {
+  const counts = {};
+  ALUMNI.forEach(a => {
+    // Group into broader categories
+    let cat = a.field;
+    if (/engineering/i.test(cat)) cat = "Engineering";
+    else if (/medicine|médecine|medical/i.test(cat)) cat = "Medicine";
+    else if (/business|management|commerce|economics|econom/i.test(cat)) cat = "Business & Management";
+    else if (/computer|IT|communication engineering/i.test(cat)) cat = "Computer Science & IT";
+    else if (/law|droit|finance.*law|law.*finance/i.test(cat)) cat = "Law";
+    else if (/architect/i.test(cat)) cat = "Architecture";
+    else if (/design|animation|audiovisual|fashion|media/i.test(cat)) cat = "Design & Arts";
+    else if (/hospitality/i.test(cat)) cat = "Hospitality";
+    counts[cat] = (counts[cat]||0)+1;
+  });
+  const sorted = Object.entries(counts).sort((a,b)=>b[1]-a[1]);
+  const max = sorted[0][1];
+  const grid = document.getElementById("fieldsGrid");
+  grid.innerHTML = sorted.map(([f,c]) => `
+    <div class="field-row fade-in">
+      <div class="field-label">${f} <span>${c}</span></div>
+      <div class="field-bar-bg"><div class="field-bar" style="width:0%" data-width="${Math.round(c/max*100)}%"></div></div>
+    </div>
+  `).join("");
+
+  const barObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const bar = e.target.querySelector(".field-bar");
+        if (bar) { setTimeout(()=>{ bar.style.width = bar.dataset.width; },100); }
+        barObserver.unobserve(e.target);
+      }
+    });
+  }, {threshold:.2});
+  grid.querySelectorAll(".field-row").forEach(el => { fadeObserver.observe(el); barObserver.observe(el); });
+}
+
+// ── Search ──
+document.getElementById("searchInput").addEventListener("input", e => {
+  searchQuery = e.target.value;
+  renderAlumni();
+});
+
+// ── Cascading logo fallback ──
+document.addEventListener("error", function(e) {
+  const img = e.target;
+  if (!img.classList.contains("uni-logo")) return;
+  const srcs = JSON.parse(img.dataset.srcs);
+  const next = parseInt(img.dataset.idx) + 1;
+  if (next < srcs.length) {
+    img.dataset.idx = next;
+    img.src = srcs[next];
+  } else {
+    img.style.display = "none";
+    img.nextElementSibling.style.display = "flex";
+  }
+}, true);
+
+// ── Init ──
+buildRegions();
+buildFilters();
+renderAlumni();
+buildFields();
+</script>
+</body>
+</html>
