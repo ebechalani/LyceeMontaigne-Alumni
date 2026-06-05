@@ -30,55 +30,12 @@
       overflow-x: hidden;
     }
 
-    /* ── TOP BANNER ── */
-    .top-banner {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 101;
-      height: 72px;
-      background: #f5f6f8;
-      overflow: hidden;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 40px;
-      border-bottom: 1px solid #dde1e8;
-    }
-    .top-banner::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: url('logos/WBfKx61.png') center/cover no-repeat;
-      opacity: .08;
-      pointer-events: none;
-    }
-    .tb-left {
-      display: flex; align-items: center; gap: 12px;
-      position: relative; z-index: 1;
-    }
-    .tb-school-icon { width: 48px; height: 54px; flex-shrink: 0; }
-    .tb-school-text { line-height: 1.2; }
-    .tb-school-text .tb-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem; font-weight: 700; color: #1b3a2d;
-      display: block;
-    }
-    .tb-school-text .tb-sub {
-      font-size: .6rem; font-weight: 700; letter-spacing: .14em;
-      color: #555; text-transform: uppercase; display: block;
-    }
-    .tb-school-text .tb-tag {
-      font-size: .72rem; font-style: italic; color: #4a7c59;
-    }
-    .tb-right {
-      position: relative; z-index: 1;
-      display: flex; align-items: center;
-    }
-    .tb-right img {
-      height: 56px; width: auto; object-fit: contain;
-    }
-
     /* ── NAV ── */
     nav {
-      position: fixed; top: 72px; left: 0; right: 0; z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 18px 48px;
-      background: rgba(10,22,40,.92);
+      background: rgba(10,22,40,.85);
       backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--border);
     }
@@ -94,7 +51,7 @@
       min-height: 100vh;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       text-align: center;
-      padding: 192px 24px 80px;
+      padding: 120px 24px 80px;
       position: relative;
       overflow: hidden;
     }
@@ -330,29 +287,6 @@
 </head>
 <body>
 
-<!-- TOP BANNER -->
-<div class="top-banner">
-  <div class="tb-left">
-    <svg class="tb-school-icon" viewBox="0 0 48 54" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="4" y="6" width="16" height="40" rx="3" fill="#3d8b40"/>
-      <rect x="28" y="6" width="16" height="40" rx="3" fill="#2e7d32"/>
-      <path d="M20 8 Q24 14 20 46" stroke="#1b5e20" stroke-width="1.5" fill="none"/>
-      <line x1="4" y1="13" x2="20" y2="13" stroke="#81c784" stroke-width="1.2" opacity=".7"/>
-      <line x1="28" y1="13" x2="44" y2="13" stroke="#1b5e20" stroke-width="1.2" opacity=".7"/>
-      <line x1="4" y1="20" x2="20" y2="20" stroke="#81c784" stroke-width="1" opacity=".5"/>
-      <line x1="28" y1="20" x2="44" y2="20" stroke="#1b5e20" stroke-width="1" opacity=".5"/>
-    </svg>
-    <div class="tb-school-text">
-      <span class="tb-name">Lycée<br/>Montaigne</span>
-      <span class="tb-sub">Beit Chabab</span>
-      <span class="tb-tag">Le talent a de l'avenir</span>
-    </div>
-  </div>
-  <div class="tb-right">
-    <img src="logos/AEFE+MLF Logo.jpg" alt="réseau mlfmonde · aefe" />
-  </div>
-</div>
-
 <!-- NAV -->
 <nav>
   <div class="nav-logo">
@@ -365,7 +299,7 @@
   </div>
   <div class="nav-links">
     <a href="#stats">Statistiques</a>
-    <a href="#regions">Pays</a>
+    <a href="#regions">Régions</a>
     <a href="#alumni">Alumni</a>
     <a href="#fields">Domaines</a>
   </div>
@@ -410,7 +344,7 @@
   <div class="section-header">
     <div class="section-tag">Géographie</div>
     <h2 class="section-title">Une présence mondiale</h2>
-    <p class="section-sub">Cliquez sur un pays pour filtrer les alumni.</p>
+    <p class="section-sub">Cliquez sur une région pour filtrer les alumni.</p>
   </div>
   <div class="regions-grid" id="regionsGrid"></div>
 </div>
