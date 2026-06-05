@@ -30,9 +30,66 @@
       overflow-x: hidden;
     }
 
+    /* ── TOP BANNER ── */
+    .top-banner {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 101;
+      height: 62px;
+      background: #fff;
+      display: flex; align-items: center; justify-content: center;
+      gap: 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .tb-brand {
+      display: flex; align-items: center; gap: 10px;
+      padding: 0 32px;
+    }
+    .tb-divider {
+      width: 1px; height: 36px; background: #ccc;
+    }
+    /* Lycée Montaigne */
+    .tb-lm-icon {
+      width: 38px; height: 42px; flex-shrink: 0;
+    }
+    .tb-lm-text { line-height: 1.15; }
+    .tb-lm-text .lm-name {
+      font-family: 'Inter', sans-serif;
+      font-size: .92rem; font-weight: 700; color: #1a1a1a;
+      display: block;
+    }
+    .tb-lm-text .lm-sub {
+      font-size: .62rem; font-weight: 600; letter-spacing: .12em;
+      color: #555; text-transform: uppercase;
+    }
+    /* MLFMonde */
+    .tb-mlf { display: flex; flex-direction: column; gap: 2px; }
+    .tb-mlf .mlf-top {
+      font-size: .68rem; font-weight: 400; color: #333; font-style: italic;
+      line-height: 1.2;
+    }
+    .tb-mlf .mlf-name {
+      font-size: 1.05rem; font-weight: 800; color: #003d82; letter-spacing: -.01em;
+    }
+    .tb-mlf .mlf-badge {
+      font-size: .58rem; font-weight: 700; letter-spacing: .06em;
+      color: #003d82; border: 1px solid #003d82;
+      padding: 1px 5px; border-radius: 2px; align-self: flex-start;
+      text-transform: uppercase;
+    }
+    /* AEFE */
+    .tb-aefe { display: flex; align-items: center; gap: 8px; }
+    .tb-aefe .aefe-letters {
+      font-size: 1.8rem; font-weight: 900; color: #e30613;
+      letter-spacing: -.04em; line-height: 1;
+      font-family: 'Inter', sans-serif;
+    }
+    .tb-aefe .aefe-desc {
+      font-size: .6rem; color: #333; max-width: 90px; line-height: 1.3;
+    }
+    .tb-aefe .aefe-desc em { font-style: normal; font-weight: 700; }
+
     /* ── NAV ── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      position: fixed; top: 62px; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 18px 48px;
       background: rgba(10,22,40,.85);
@@ -51,7 +108,7 @@
       min-height: 100vh;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       text-align: center;
-      padding: 120px 24px 80px;
+      padding: 182px 24px 80px;
       position: relative;
       overflow: hidden;
     }
@@ -287,6 +344,27 @@
 </head>
 <body>
 
+<!-- TOP BANNER -->
+<div class="top-banner">
+  <div class="tb-brand">
+    <svg class="tb-lm-icon" viewBox="0 0 38 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="4" y="6" width="13" height="30" rx="2" fill="#4caf50" opacity=".9"/>
+      <rect x="21" y="6" width="13" height="30" rx="2" fill="#388e3c"/>
+      <path d="M17 8 Q19 12 17 36" stroke="#2e7d32" stroke-width="1.2" fill="none"/>
+      <path d="M4 10 H17" stroke="#81c784" stroke-width="1" opacity=".6"/>
+      <path d="M21 10 H34" stroke="#1b5e20" stroke-width="1" opacity=".6"/>
+    </svg>
+    <div class="tb-lm-text">
+      <span class="lm-name">Lycée<br/>Montaigne</span>
+      <span class="lm-sub">Beit Chabab</span>
+    </div>
+  </div>
+  <div class="tb-divider"></div>
+  <div class="tb-brand">
+    <img src="logos/AEFE+MLF Logo.jpg" alt="réseau mlfmonde · aefe" style="height:46px; width:auto; object-fit:contain;" />
+  </div>
+</div>
+
 <!-- NAV -->
 <nav>
   <div class="nav-logo">
@@ -299,7 +377,7 @@
   </div>
   <div class="nav-links">
     <a href="#stats">Statistiques</a>
-    <a href="#regions">Régions</a>
+    <a href="#regions">Pays</a>
     <a href="#alumni">Alumni</a>
     <a href="#fields">Domaines</a>
   </div>
@@ -344,7 +422,7 @@
   <div class="section-header">
     <div class="section-tag">Géographie</div>
     <h2 class="section-title">Une présence mondiale</h2>
-    <p class="section-sub">Cliquez sur une région pour filtrer les alumni.</p>
+    <p class="section-sub">Cliquez sur un pays pour filtrer les alumni.</p>
   </div>
   <div class="regions-grid" id="regionsGrid"></div>
 </div>
