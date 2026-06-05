@@ -630,7 +630,7 @@ function buildRegions() {
     <div class="region-card fade-in" data-country="${country}" onclick="filterByCountry('${country}')">
       <div class="region-flag">${REGION_FLAGS[country]||"🌍"}</div>
       <div class="region-name">${country}</div>
-      <div class="region-count">${count} alumnus${count>1?"i":""}</div>
+      <div class="region-count">${count} alumni</div>
     </div>
   `).join("");
   grid.querySelectorAll(".fade-in").forEach(el => fadeObserver.observe(el));
