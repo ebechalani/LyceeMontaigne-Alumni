@@ -39,9 +39,14 @@
       backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--border);
     }
-    .nav-logo { display: flex; align-items: center; gap: 12px; }
-    .nav-logo svg { width: 34px; height: 34px; }
-    .nav-logo span { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--gold); }
+    .nav-logo {
+      display: flex; align-items: center;
+      background: rgba(255,255,255,0.95);
+      border-radius: 10px;
+      padding: 5px 14px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .nav-logo img { height: 50px; width: auto; object-fit: contain; display: block; }
     .nav-links { display: flex; gap: 32px; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: .88rem; font-weight: 500; transition: color .2s; }
     .nav-links a:hover { color: var(--gold); }
@@ -290,12 +295,7 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo">
-    <svg viewBox="0 0 34 34" fill="none">
-      <circle cx="17" cy="17" r="16" stroke="#c9a84c" stroke-width="1.5"/>
-      <path d="M9 24L17 10L25 24" stroke="#c9a84c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M12 20H22" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
-    </svg>
-    <span>Lycée Montaigne</span>
+    <img src="logos/AEFE+MLF Logo.jpg" alt="Lycée Montaigne · réseau mlfmonde · aefe" />
   </div>
   <div class="nav-links">
     <a href="#stats">Statistiques</a>
