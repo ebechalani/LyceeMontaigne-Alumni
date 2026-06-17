@@ -226,6 +226,9 @@
     .tag.year { background: rgba(99,179,237,.08); color: #90cdf4; border-color: rgba(99,179,237,.15); }
 
     /* ── MAP SECTION ── */
+    #stats { scroll-margin-top: 70px; }
+    #regions { scroll-margin-top: 70px; }
+    .stats-section { min-height: 100vh; align-content: center; }
     .regions-section { padding: 80px 48px; background: var(--navy2); }
     .regions-grid {
       display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
@@ -299,7 +302,7 @@
   </div>
   <div class="nav-links">
     <a href="#stats">Statistiques</a>
-    <a href="#regions">Régions</a>
+    <a href="#regions">Pays</a>
     <a href="#alumni">Alumni</a>
     <a href="#fields">Domaines</a>
   </div>
@@ -344,7 +347,7 @@
   <div class="section-header">
     <div class="section-tag">Géographie</div>
     <h2 class="section-title">Une présence mondiale</h2>
-    <p class="section-sub">Cliquez sur une région pour filtrer les alumni.</p>
+    <p class="section-sub">Cliquez sur un pays pour filtrer les alumni.</p>
   </div>
   <div class="regions-grid" id="regionsGrid"></div>
 </div>
