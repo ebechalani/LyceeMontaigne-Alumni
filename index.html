@@ -100,29 +100,18 @@
 
     /* ── STATS ── */
     .stats-section {
-      position: relative;
       padding: 80px 48px;
-      background: #050d18;
-      overflow: hidden;
-      min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: center;
+      background: var(--navy2);
     }
-    .world-map-svg {
-      position: absolute; top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-    }
-    .stats-content { position: relative; z-index: 2; }
     .stats-kpi {
       display: grid; grid-template-columns: repeat(4,1fr);
       gap: 20px; margin-bottom: 48px;
     }
     .stat-card {
-      background: rgba(10,22,40,.75);
+      background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 36px 24px; text-align: center;
-      backdrop-filter: blur(8px);
+      padding: 40px 24px; text-align: center;
     }
     .stat-number {
       font-family: 'Playfair Display', serif;
@@ -368,85 +357,37 @@
 
 <!-- STATS -->
 <div class="stats-section" id="stats">
-  <!-- World map SVG background -->
-  <svg class="world-map-svg" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <radialGradient id="bgGrad" cx="60%" cy="35%" r="80%">
-        <stop offset="0%" stop-color="#0d2040"/>
-        <stop offset="100%" stop-color="#050d18"/>
-      </radialGradient>
-      <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-        <feGaussianBlur stdDeviation="3" result="blur"/>
-        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-      </filter>
-    </defs>
-    <rect width="1440" height="720" fill="url(#bgGrad)"/>
-    <!-- Continents -->
-    <g fill="rgba(25,55,100,0.45)" stroke="rgba(70,130,200,0.25)" stroke-width="1">
-      <!-- North America -->
-      <path d="M48,160 L120,110 L200,82 L290,68 L370,88 L430,118 L468,155 L498,182 L482,232 L444,286 L400,348 L358,388 L322,366 L284,304 L244,280 L204,246 L164,222 Z"/>
-      <!-- Greenland -->
-      <path d="M520,50 L580,42 L620,60 L610,100 L570,115 L530,105 Z"/>
-      <!-- South America -->
-      <path d="M316,332 L368,312 L418,324 L458,364 L476,428 L486,488 L462,548 L424,608 L372,648 L324,608 L284,528 L296,452 L306,390 Z"/>
-      <!-- Europe -->
-      <path d="M436,130 L502,108 L568,108 L608,122 L628,144 L616,164 L584,174 L562,184 L524,194 L494,184 L464,166 Z"/>
-      <!-- Scandinavia -->
-      <path d="M502,80 L540,68 L572,80 L568,110 L530,120 L502,108 Z"/>
-      <!-- Africa -->
-      <path d="M450,202 L538,176 L608,200 L658,234 L674,318 L664,404 L644,464 L580,514 L508,514 L454,474 L430,404 L424,314 Z"/>
-      <!-- Russia/North Asia -->
-      <path d="M642,78 L820,58 L1020,50 L1200,68 L1244,110 L1100,124 L900,134 L720,124 Z"/>
-      <!-- Middle East -->
-      <path d="M620,200 L684,200 L764,220 L794,270 L764,310 L704,320 L644,290 L624,250 Z"/>
-      <!-- South Asia -->
-      <path d="M794,180 L904,160 L1004,180 L1064,220 L1084,280 L1024,320 L944,340 L884,300 L824,260 L794,220 Z"/>
-      <!-- East Asia -->
-      <path d="M1004,100 L1108,80 L1184,120 L1204,180 L1144,220 L1064,230 L1004,210 L984,160 Z"/>
-      <!-- SE Asia -->
-      <path d="M1064,280 L1120,270 L1160,300 L1140,340 L1090,340 L1060,320 Z"/>
-      <!-- Australia -->
-      <path d="M1144,400 L1244,380 L1344,400 L1384,442 L1364,502 L1284,540 L1184,520 L1124,470 Z"/>
-    </g>
-    <!-- Dynamic lines, dots, labels from JS -->
-    <g id="mapLines"></g>
-    <g id="mapDots"></g>
-    <g id="mapLabels"></g>
-  </svg>
-
-  <div class="stats-content">
-    <div class="section-header">
-      <div class="section-tag">Vue d'ensemble</div>
-      <h2 class="section-title">Statistiques</h2>
-      <p class="section-sub">Chiffres clés des promotions 2022 – 2025.</p>
+  <div class="section-header">
+    <div class="section-tag">Vue d'ensemble</div>
+    <h2 class="section-title">Statistiques</h2>
+    <p class="section-sub">Chiffres clés des promotions 2022 – 2025.</p>
+  </div>
+  <div class="stats-kpi">
+    <div class="stat-card">
+      <div class="stat-number" data-target="115">0</div>
+      <div class="stat-label">Alumni suivis</div>
     </div>
-    <div class="stats-kpi">
-      <div class="stat-card">
-        <div class="stat-number" data-target="115">0</div>
-        <div class="stat-label">Alumni suivis</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number" data-target="10">0</div>
-        <div class="stat-label">Pays représentés</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number" data-target="30">0</div>
-        <div class="stat-label">Universités</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number" data-target="4">0</div>
-        <div class="stat-label">Promotions</div>
-      </div>
+    <div class="stat-card">
+      <div class="stat-number" data-target="10">0</div>
+      <div class="stat-label">Pays représentés</div>
     </div>
-    <div class="stats-charts">
-      <div class="chart-box">
-        <h3>Répartition par promotion</h3>
-        <div class="bar-row" id="yearBars"></div>
-      </div>
-      <div class="chart-box">
-        <h3>Top pays</h3>
-        <div class="bar-row" id="countryBars"></div>
-      </div>
+    <div class="stat-card">
+      <div class="stat-number" data-target="30">0</div>
+      <div class="stat-label">Universités</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number" data-target="4">0</div>
+      <div class="stat-label">Promotions</div>
+    </div>
+  </div>
+  <div class="stats-charts">
+    <div class="chart-box">
+      <h3>Répartition par promotion</h3>
+      <div class="bar-row" id="yearBars"></div>
+    </div>
+    <div class="chart-box">
+      <h3>Top pays</h3>
+      <div class="bar-row" id="countryBars"></div>
     </div>
   </div>
 </div>
@@ -929,52 +870,12 @@ function buildStatCharts() {
   });
 }
 
-// ── World map lines ──
-function buildWorldMap() {
-  // Mercator coords: x=(lon+180)/360*1440, y=(90-lat)/180*720
-  const COORDS = {
-    'Liban':       { x:862, y:224, flag:'🇱🇧', anchor:'start' },
-    'Canada':      { x:418, y:179, flag:'🇨🇦', anchor:'end' },
-    'Royaume-Uni': { x:718, y:152, flag:'🇬🇧', anchor:'end' },
-    'Suisse':      { x:749, y:171, flag:'🇨🇭', anchor:'end' },
-    'Autriche':    { x:783, y:166, flag:'🇦🇹', anchor:'start' },
-    'Chypre':      { x:852, y:218, flag:'🇨🇾', anchor:'start' },
-    'France':      { x:729, y:163, flag:'🇫🇷', anchor:'end' },
-    'Italie':      { x:768, y:192, flag:'🇮🇹', anchor:'end' },
-    'États-Unis':  { x:412, y:202, flag:'🇺🇸', anchor:'end' },
-    'Australie':   { x:1252,y:468, flag:'🇦🇺', anchor:'start' },
-  };
-  const o = COORDS['Liban'];
-  const lines = document.getElementById('mapLines');
-  const dots  = document.getElementById('mapDots');
-  const lbls  = document.getElementById('mapLabels');
-
-  Object.entries(COORDS).forEach(([name, p]) => {
-    if (name === 'Liban') return;
-    const cpx = (o.x + p.x) / 2;
-    const cpy = Math.min(o.y, p.y) - Math.abs(p.x - o.x) * 0.18;
-    lines.innerHTML += `<path d="M${o.x},${o.y} Q${cpx},${cpy} ${p.x},${p.y}" stroke="#c9a84c" stroke-width="1.4" fill="none" opacity=".65"/>`;
-    dots.innerHTML  += `<circle cx="${p.x}" cy="${p.y}" r="4" fill="#c9a84c" filter="url(#glow)"/>
-      <circle cx="${p.x}" cy="${p.y}" r="9" fill="none" stroke="#c9a84c" stroke-width="1" opacity=".35"/>`;
-    const lx = p.anchor === 'start' ? p.x + 14 : p.x - 14;
-    lbls.innerHTML  += `<text x="${lx}" y="${p.y+5}" font-size="13" fill="#e8d5a0" font-family="Inter,sans-serif" font-weight="600" text-anchor="${p.anchor}">${p.flag} ${name}</text>`;
-  });
-
-  // Lebanon origin
-  dots.innerHTML += `
-    <circle cx="${o.x}" cy="${o.y}" r="7" fill="#c9a84c" filter="url(#glow)"/>
-    <circle cx="${o.x}" cy="${o.y}" r="14" fill="none" stroke="#c9a84c" stroke-width="1.5" opacity=".5"/>
-    <circle cx="${o.x}" cy="${o.y}" r="22" fill="none" stroke="#c9a84c" stroke-width="1" opacity=".2"/>`;
-  lbls.innerHTML += `<text x="${o.x+18}" y="${o.y+22}" font-size="15" fill="#f8f0d0" font-family="Inter,sans-serif" font-weight="700">${o.flag} Liban</text>`;
-}
-
 // ── Init ──
 buildRegions();
 buildFilters();
 renderAlumni();
 buildFields();
 buildStatCharts();
-buildWorldMap();
 </script>
 </body>
 </html>
