@@ -9,14 +9,14 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:   #0a1628;
-      --navy2:  #0f2044;
-      --gold:   #c9a84c;
-      --gold2:  #e8c96e;
-      --white:  #f8f9fc;
-      --muted:  #94a3b8;
-      --card-bg:#111e35;
-      --border: rgba(201,168,76,.18);
+      --navy:   #0b111e;
+      --navy2:  #101829;
+      --gold:   #c4a461;
+      --gold2:  #e4cc93;
+      --white:  #f3f5fa;
+      --muted:  #8b97ad;
+      --card-bg:#141d30;
+      --border: rgba(196,164,97,.15);
       --radius: 14px;
     }
 
@@ -486,19 +486,19 @@
 <div class="theme-panel" id="themePanel">
   <div class="theme-panel-title">Thème</div>
   <div class="theme-option active" id="theme-navy" onclick="setTheme('navy')">
-    <span class="theme-swatch" style="background:linear-gradient(135deg,#0f2044,#c9a84c)"></span>
+    <span class="theme-swatch" style="background:linear-gradient(135deg,#101829,#c4a461)"></span>
     Navy · Or
   </div>
   <div class="theme-option" id="theme-blue" onclick="setTheme('blue')">
-    <span class="theme-swatch" style="background:linear-gradient(135deg,#061e4a,#1e6ec8)"></span>
+    <span class="theme-swatch" style="background:linear-gradient(135deg,#0d2038,#4b93d6)"></span>
     Bleu MLF
   </div>
   <div class="theme-option" id="theme-green" onclick="setTheme('green')">
-    <span class="theme-swatch" style="background:linear-gradient(135deg,#0d2410,#3d8b40)"></span>
+    <span class="theme-swatch" style="background:linear-gradient(135deg,#0d2116,#45a268)"></span>
     Vert Lycée
   </div>
   <div class="theme-option" id="theme-slate" onclick="setTheme('slate')">
-    <span class="theme-swatch" style="background:linear-gradient(135deg,#1a2332,#8b95a5)"></span>
+    <span class="theme-swatch" style="background:linear-gradient(135deg,#1c222b,#96a2b3)"></span>
     Ardoise Pro
   </div>
 </div>
@@ -700,7 +700,7 @@ const REGION_FLAGS = {
   "Italie":"🇮🇹","Australie":"🇦🇺","Autriche":"🇦🇹","Chypre":"🇨🇾"
 };
 
-const YEAR_COLORS = {2022:"#60a5fa",2023:"#34d399",2024:"#f472b6",2025:"#a78bfa"};
+const YEAR_COLORS = {2022:"#7a97c2",2023:"#6bab97",2024:"#c2967a",2025:"#9a8ec2"};
 
 // ── State ──
 let activeCountry = "all";
@@ -936,10 +936,10 @@ function buildStatCharts() {
 
 // ── Theme switcher ──
 const THEMES = {
-  navy:     { '--navy':'#0a1628','--navy2':'#0f2044','--gold':'#c9a84c','--gold2':'#e8c96e','--card-bg':'#111e35','--border':'rgba(201,168,76,.18)','--muted':'#94a3b8' },
-  blue:     { '--navy':'#061428','--navy2':'#0a2242','--gold':'#1e6ec8','--gold2':'#4d9fe0','--card-bg':'#0d1e3a','--border':'rgba(30,110,200,.22)','--muted':'#7a9fc4' },
-  green:    { '--navy':'#081a0a','--navy2':'#0d2410','--gold':'#3d8b40','--gold2':'#5cb860','--card-bg':'#0f2212','--border':'rgba(61,139,64,.22)','--muted':'#7fa882' },
-  slate:    { '--navy':'#1a2332','--navy2':'#222c3d','--gold':'#8b95a5','--gold2':'#aab3c0','--card-bg':'#232d3e','--border':'rgba(139,149,165,.2)','--muted':'#9aa5b5' },
+  navy:     { '--navy':'#0b111e','--navy2':'#101829','--gold':'#c4a461','--gold2':'#e4cc93','--card-bg':'#141d30','--border':'rgba(196,164,97,.15)','--muted':'#8b97ad' },
+  blue:     { '--navy':'#081627','--navy2':'#0d2038','--gold':'#4b93d6','--gold2':'#7db6ec','--card-bg':'#112742','--border':'rgba(75,147,214,.16)','--muted':'#8399b4' },
+  green:    { '--navy':'#08150e','--navy2':'#0d2116','--gold':'#45a268','--gold2':'#7bcb96','--card-bg':'#11291c','--border':'rgba(69,162,104,.16)','--muted':'#85a392' },
+  slate:    { '--navy':'#14181f','--navy2':'#1c222b','--gold':'#96a2b3','--gold2':'#bac5d3','--card-bg':'#212833','--border':'rgba(150,162,179,.16)','--muted':'#8a96a6' },
 };
 
 function setTheme(name) {
