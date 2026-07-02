@@ -680,6 +680,9 @@ const LOGO_DIRECT = {
 function logoSources(uni, domain) {
   const src = [];
   if (LOGO_DIRECT[uni]) src.push(LOGO_DIRECT[uni]);
+  // Auto: any image dropped in /logos named exactly after the university
+  const enc = encodeURIComponent(uni).replace(/'/g, "%27");
+  src.push(`./logos/${enc}.png`, `./logos/${enc}.jpg`);
   if (domain) {
     src.push(
       `https://www.google.com/s2/favicons?domain=${domain}&sz=128`,
@@ -813,9 +816,10 @@ function renderAlumni() {
     const av = initials(a.name);
     const yc = YEAR_COLORS[a.year] || "#c9a84c";
     const domain = UNI_DOMAINS[a.uni];
-    const srcs = (domain || LOGO_DIRECT[a.uni]) ? JSON.stringify(logoSources(a.uni, domain)) : null;
+    const sources = logoSources(a.uni, domain);
+    const srcs = sources.length ? JSON.stringify(sources) : null;
     const avatarHtml = srcs
-      ? `<img src="${logoSources(a.uni, domain)[0]}" data-srcs='${srcs}' data-idx="0" class="uni-logo" alt="${a.uni}" /><span class="av-initials" style="display:none">${av}</span>`
+      ? `<img src="${sources[0]}" data-srcs='${srcs}' data-idx="0" class="uni-logo" alt="${a.uni}" /><span class="av-initials" style="display:none">${av}</span>`
       : `<span class="av-initials">${av}</span>`;
     return `
     <div class="alumni-card fade-in">
