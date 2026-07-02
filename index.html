@@ -682,18 +682,16 @@ const LOGO_DIRECT = {
 };
 
 function logoSources(uni, domain) {
-  if (LOGO_DIRECT[uni]) {
-    return [
-      LOGO_DIRECT[uni],
-      `https://logo.clearbit.com/${domain}`,
+  const src = [];
+  if (LOGO_DIRECT[uni]) src.push(LOGO_DIRECT[uni]);
+  if (domain) {
+    src.push(
       `https://www.google.com/s2/favicons?domain=${domain}&sz=128`,
-    ];
+      `https://icons.duckduckgo.com/ip3/${domain}.ico`,
+      `https://logo.clearbit.com/${domain}`,
+    );
   }
-  return [
-    `https://logo.clearbit.com/${domain}`,
-    `https://www.google.com/s2/favicons?domain=${domain}&sz=128`,
-    `https://icons.duckduckgo.com/ip3/${domain}.ico`,
-  ];
+  return src;
 }
 
 const REGION_FLAGS = {
@@ -849,14 +847,16 @@ function buildFields() {
   ALUMNI.forEach(a => {
     // Group into broader categories
     let cat = a.field;
-    if (/engineering/i.test(cat)) cat = "Engineering";
-    else if (/medicine|médecine|medical/i.test(cat)) cat = "Medicine";
-    else if (/business|management|commerce|economics|econom/i.test(cat)) cat = "Business & Management";
-    else if (/computer|IT|communication engineering/i.test(cat)) cat = "Computer Science & IT";
-    else if (/law|droit|finance.*law|law.*finance/i.test(cat)) cat = "Law";
+    if (/hôteli|hospitality|tourisme/i.test(cat)) cat = "Hôtellerie & Tourisme";
+    else if (/informatique|computer|communication/i.test(cat)) cat = "Informatique & Communications";
+    else if (/ingéni|engineering/i.test(cat)) cat = "Ingénierie";
+    else if (/médecine|medicine|medical|infirmi|nursing|santé|pharma|dent/i.test(cat)) cat = "Médecine & Santé";
     else if (/architect/i.test(cat)) cat = "Architecture";
-    else if (/design|animation|audiovisual|fashion|media/i.test(cat)) cat = "Design & Arts";
-    else if (/hospitality/i.test(cat)) cat = "Hospitality";
+    else if (/design|animation|audiovisuel|mode|fashion|média|art/i.test(cat)) cat = "Design & Arts";
+    else if (/droit|law|politique|relations internationales/i.test(cat)) cat = "Droit & Sciences politiques";
+    else if (/commerce|business|management|gestion|économ|economics|marketing|finance|comptab/i.test(cat)) cat = "Commerce & Gestion";
+    else if (/science/i.test(cat)) cat = "Sciences";
+    else cat = "Autres";
     counts[cat] = (counts[cat]||0)+1;
   });
   const sorted = Object.entries(counts).sort((a,b)=>b[1]-a[1]);
