@@ -9,17 +9,17 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:   #0b111e;
-      --navy2:  #101829;
-      --gold:   #c4a461;
-      --gold2:  #e4cc93;
-      --white:  #f3f5fa;
-      --muted:  #8b97ad;
-      --card-bg:#141d30;
-      --border: rgba(196,164,97,.15);
-      --nav-bg: rgba(11,17,30,.85);
-      --track:  rgba(255,255,255,.07);
-      --on-accent: #0b111e;
+      --navy:   #dcebfb;
+      --navy2:  #eaf3fc;
+      --gold:   #2e9e5b;
+      --gold2:  #54c07f;
+      --white:  #14304a;
+      --muted:  #5f7b95;
+      --card-bg:#ffffff;
+      --border: rgba(20,60,100,.14);
+      --nav-bg: rgba(255,255,255,.85);
+      --track:  rgba(20,50,90,.10);
+      --on-accent: #ffffff;
       --radius: 14px;
     }
 
@@ -488,25 +488,13 @@
 </button>
 <div class="theme-panel" id="themePanel">
   <div class="theme-panel-title">Thème</div>
-  <div class="theme-option active" id="theme-navy" onclick="setTheme('navy')">
-    <span class="theme-swatch" style="background:linear-gradient(135deg,#101829,#c4a461)"></span>
-    Navy · Or
-  </div>
-  <div class="theme-option" id="theme-blue" onclick="setTheme('blue')">
-    <span class="theme-swatch" style="background:linear-gradient(135deg,#0d2038,#4b93d6)"></span>
-    Bleu MLF
-  </div>
-  <div class="theme-option" id="theme-green" onclick="setTheme('green')">
-    <span class="theme-swatch" style="background:linear-gradient(135deg,#0d2116,#45a268)"></span>
-    Vert Lycée
-  </div>
-  <div class="theme-option" id="theme-slate" onclick="setTheme('slate')">
-    <span class="theme-swatch" style="background:linear-gradient(135deg,#1c222b,#96a2b3)"></span>
-    Ardoise Pro
-  </div>
-  <div class="theme-option" id="theme-light" onclick="setTheme('light')">
+  <div class="theme-option active" id="theme-light" onclick="setTheme('light')">
     <span class="theme-swatch" style="background:linear-gradient(135deg,#dcebfb,#ffffff 55%,#2e9e5b)"></span>
     Bleu clair
+  </div>
+  <div class="theme-option" id="theme-navy" onclick="setTheme('navy')">
+    <span class="theme-swatch" style="background:linear-gradient(135deg,#101829,#c4a461)"></span>
+    Navy · Or
   </div>
 </div>
 
@@ -943,11 +931,8 @@ function buildStatCharts() {
 
 // ── Theme switcher ──
 const THEMES = {
-  navy:     { '--navy':'#0b111e','--navy2':'#101829','--gold':'#c4a461','--gold2':'#e4cc93','--card-bg':'#141d30','--border':'rgba(196,164,97,.15)','--muted':'#8b97ad','--white':'#f3f5fa','--nav-bg':'rgba(11,17,30,.85)','--track':'rgba(255,255,255,.07)','--on-accent':'#0b111e' },
-  blue:     { '--navy':'#081627','--navy2':'#0d2038','--gold':'#4b93d6','--gold2':'#7db6ec','--card-bg':'#112742','--border':'rgba(75,147,214,.16)','--muted':'#8399b4','--white':'#eef4fb','--nav-bg':'rgba(8,22,39,.85)','--track':'rgba(255,255,255,.07)','--on-accent':'#081627' },
-  green:    { '--navy':'#08150e','--navy2':'#0d2116','--gold':'#45a268','--gold2':'#7bcb96','--card-bg':'#11291c','--border':'rgba(69,162,104,.16)','--muted':'#85a392','--white':'#f1f7f2','--nav-bg':'rgba(8,21,14,.85)','--track':'rgba(255,255,255,.07)','--on-accent':'#08150e' },
-  slate:    { '--navy':'#14181f','--navy2':'#1c222b','--gold':'#96a2b3','--gold2':'#bac5d3','--card-bg':'#212833','--border':'rgba(150,162,179,.16)','--muted':'#8a96a6','--white':'#eef1f5','--nav-bg':'rgba(20,24,31,.85)','--track':'rgba(255,255,255,.07)','--on-accent':'#14181f' },
   light:    { '--navy':'#dcebfb','--navy2':'#eaf3fc','--gold':'#2e9e5b','--gold2':'#54c07f','--card-bg':'#ffffff','--border':'rgba(20,60,100,.14)','--muted':'#5f7b95','--white':'#14304a','--nav-bg':'rgba(255,255,255,.85)','--track':'rgba(20,50,90,.10)','--on-accent':'#ffffff' },
+  navy:     { '--navy':'#0b111e','--navy2':'#101829','--gold':'#c4a461','--gold2':'#e4cc93','--card-bg':'#141d30','--border':'rgba(196,164,97,.15)','--muted':'#8b97ad','--white':'#f3f5fa','--nav-bg':'rgba(11,17,30,.85)','--track':'rgba(255,255,255,.07)','--on-accent':'#0b111e' },
 };
 
 function setTheme(name) {
