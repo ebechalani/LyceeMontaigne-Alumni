@@ -386,7 +386,7 @@
 <div class="hero">
   <div class="hero-badge">
     <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="5"/></svg>
-    Promotions 2022 – 2025
+    <span>Promotions <span class="promo-range">2022 – 2026</span></span>
   </div>
   <h1>Du Lycée Montaigne<br/>aux universités du monde</h1>
   <p>Découvrez où nos diplômés poursuivent leur parcours académique — des universités du Liban aux institutions les plus prestigieuses à l'international.</p>
@@ -401,23 +401,23 @@
   <div class="section-header">
     <div class="section-tag">Vue d'ensemble</div>
     <h2 class="section-title">Statistiques</h2>
-    <p class="section-sub">Chiffres clés des promotions 2022 – 2025.</p>
+    <p class="section-sub">Chiffres clés des promotions <span class="promo-range">2022 – 2026</span>.</p>
   </div>
   <div class="stats-kpi">
     <div class="stat-card">
-      <div class="stat-number" data-target="115">0</div>
+      <div class="stat-number" data-kpi="alumni">0</div>
       <div class="stat-label">Alumni suivis</div>
     </div>
     <div class="stat-card">
-      <div class="stat-number" data-target="10">0</div>
+      <div class="stat-number" data-kpi="countries">0</div>
       <div class="stat-label">Pays représentés</div>
     </div>
     <div class="stat-card">
-      <div class="stat-number" data-target="30">0</div>
+      <div class="stat-number" data-kpi="universities">0</div>
       <div class="stat-label">Universités</div>
     </div>
     <div class="stat-card">
-      <div class="stat-number" data-target="4">0</div>
+      <div class="stat-number" data-kpi="promotions">0</div>
       <div class="stat-label">Promotions</div>
     </div>
   </div>
@@ -477,7 +477,7 @@
 <!-- FOOTER -->
 <footer>
   <p style="margin-bottom:6px;font-family:'Playfair Display',serif;color:#c9a84c;font-size:1rem;">Lycée Montaigne</p>
-  <p>Suivi des alumni · Promotions 2022–2025</p>
+  <p>Suivi des alumni · Promotions <span class="promo-range">2022 – 2026</span></p>
 </footer>
 
 <!-- THEME SWITCHER -->
@@ -511,6 +511,7 @@ const ALUMNI = [
   { name:"Tchoupourian Chris",     uni:"Concordia University",          field:"Ingénierie industrielle",                        country:"Canada",      year:2024 },
   { name:"Kamal Marc",             uni:"Concordia University",          field:"Ingénierie civile",                              country:"Canada",      year:2025 },
   { name:"Selfani Samir",          uni:"Concordia University",          field:"Économie",                                       country:"Canada",      year:2025 },
+  { name:"Selfani Nadim",          uni:"Concordia University",          field:"Économie",                                       country:"Canada",      year:2026 },
 
   // ── FRANCE ──
   { name:"Abou Rahal Théa",        uni:"Université de Strasbourg",      field:"Biologie moléculaire",                           country:"France",      year:2022 },
@@ -530,6 +531,9 @@ const ALUMNI = [
   { name:"Mazraani Kelly",         uni:"Université de Montpellier",     field:"Gestion",                                        country:"France",      year:2024 },
   { name:"Saba Mattias",           uni:"Lycée Militaire d'Autun",       field:"Classe préparatoire scientifique MPSI",          country:"France",      year:2024 },
   { name:"Tauk Michaelle",         uni:"ESSEC Business School",         field:"Management",                                     country:"France",      year:2025 },
+  { name:"Chidiac Patricia",       uni:"Institut Agro Dijon",           field:"Alimentation durable",                           country:"France",      year:2026 },
+  { name:"Hajj Julia",             uni:"AMOS Sport Business School",    field:"Management du sport et communication",           country:"France",      year:2026 },
+  { name:"Semaan Alexandre",       uni:"ICFA Montpellier",              field:"Management commercial opérationnel",             country:"France",      year:2026 },
 
   // ── LIBAN ──
   { name:"Bejjani Marc-Antoine",   uni:"USEK",                          field:"Commerce",                                       country:"Liban",       year:2022 },
@@ -543,7 +547,7 @@ const ALUMNI = [
   { name:"Labaky Jana",            uni:"USJ",                           field:"Médecine dentaire",                              country:"Liban",       year:2022 },
   { name:"Mehranian Caline",       uni:"AUB",                           field:"Marketing",                                      country:"Liban",       year:2022 },
   { name:"Obeid Talaat",           uni:"AUB",                           field:"Médecine",                                       country:"Liban",       year:2022 },
-  { name:"Taoukjian Elissa",       uni:"LAU",                           field:"Sciences politiques et Relations Internationales",country:"Liban",      year:2022 },
+  { name:"Taoukjian Elissa",       uni:"LAU", uni2:"King's College London", field:"Sciences politiques et Relations Internationales",country:"Liban", year:2022 },
   { name:"Abboud Elias",           uni:"NDU",                           field:"Architecture",                                   country:"Liban",       year:2023 },
   { name:"Akiki Joy",              uni:"AUB",                           field:"Médecine",                                       country:"Liban",       year:2023 },
   { name:"Beyrouthy Farah",        uni:"ALBA",                          field:"Animation 3D",                                   country:"Liban",       year:2023 },
@@ -608,19 +612,59 @@ const ALUMNI = [
   { name:"Mouawad Princia",        uni:"AUB",                           field:"Architecture",                                   country:"Liban",       year:2025 },
   { name:"Moukarzel Charbel",      uni:"AUB",                           field:"Ingénierie informatique et des communications",         country:"Liban",       year:2025 },
   { name:"Nammour Sienna",         uni:"AUB",                           field:"Médias et communication",                        country:"Liban",       year:2025 },
+  { name:"Abou Jaoudé Gael",       uni:"USJ",                           field:"Droit",                                          country:"Liban",       year:2026 },
+  { name:"Andari Kamal",           uni:"LAU",                           field:"Médecine",                                       country:"Liban",       year:2026 },
+  { name:"Antonia Raphael",        uni:"AUB",                           field:"Ingénierie industrielle",                        country:"Liban",       year:2026 },
+  { name:"Asmar Joey",             uni:"LAU",                           field:"Commerce et économie",                           country:"Liban",       year:2026 },
+  { name:"Azar Jean-Pierre",       uni:"LAU",                           field:"Ingénierie industrielle",                        country:"Liban",       year:2026 },
+  { name:"Azar Laetitia",          uni:"LAU",                           field:"Médecine",                                       country:"Liban",       year:2026 },
+  { name:"Berbari Rami",           uni:"AUB",                           field:"Commerce",                                       country:"Liban",       year:2026 },
+  { name:"Bou Debs Jean-Paul",     uni:"NDU",                           field:"Ingénierie informatique",                        country:"Liban",       year:2026 },
+  { name:"Chalhoub Maria",         uni:"NDU",                           field:"Commerce",                                       country:"Liban",       year:2026 },
+  { name:"Fayad Boutros",          uni:"LAU",                           field:"Médias et communication",                        country:"Liban",       year:2026 },
+  { name:"Frangieh Leana",         uni:"USEK",                          field:"Sciences politiques",                            country:"Liban",       year:2026 },
+  { name:"Ghorayeb Shakira",       uni:"LAU",                           field:"Médecine",                                       country:"Liban",       year:2026 },
+  { name:"Haddad Nicolas",         uni:"LAU",                           field:"Ingénierie mécanique",                           country:"Liban",       year:2026 },
+  { name:"Hakim Enzo",             uni:"LAU",                           field:"Informatique",                                   country:"Liban",       year:2026 },
+  { name:"Hechaimé Tia",           uni:"LAU",                           field:"Médecine",                                       country:"Liban",       year:2026 },
+  { name:"Jalbout Téo",            uni:"AUB",                           field:"Ingénierie industrielle",                        country:"Liban",       year:2026 },
+  { name:"Jamati Alexandre Matteo",uni:"LAU",                           field:"Informatique",                                   country:"Liban",       year:2026 },
+  { name:"Kassis Matteo",          uni:"ESA",                           field:"Commerce",                                       country:"Liban",       year:2026 },
+  { name:"Keuchguerian Marko",     uni:"AUB",                           field:"Commerce",                                       country:"Liban",       year:2026 },
+  { name:"Keyrouz Karim",          uni:"AUB",                           field:"Architecture",                                   country:"Liban",       year:2026 },
+  { name:"Khoury Nour Maria",      uni:"USJ",                           field:"Biochimie",                                      country:"Liban",       year:2026 },
+  { name:"Labaky Maroun",          uni:"AUB",                           field:"Commerce",                                       country:"Liban",       year:2026 },
+  { name:"Lahoud Nasri",           uni:"LAU",                           field:"Commerce",                                       country:"Liban",       year:2026 },
+  { name:"Majdalani Hadi",         uni:"AUB",                           field:"Commerce",                                       country:"Liban",       year:2026 },
+  { name:"Mallah Vincent",         uni:"USJ",                           field:"Physiothérapie",                                 country:"Liban",       year:2026 },
+  { name:"Manoukian Tara",         uni:"USJ",                           field:"Mode",                                           country:"Liban",       year:2026 },
+  { name:"Matta Leticia",          uni:"ESA",                           field:"Commerce",                                       country:"Liban",       year:2026 },
+  { name:"Mouawad Mathéo",         uni:"LAU",                           field:"Informatique",                                   country:"Liban",       year:2026 },
+  { name:"Mourad Christina",       uni:"University of Balamand",        field:"Médecine",                                       country:"Liban",       year:2026 },
+  { name:"Raad Jackie Marie",      uni:"ESA",                           field:"Commerce",                                       country:"Liban",       year:2026 },
+  { name:"Rahi Elias",             uni:"LAU",                           field:"Sciences politiques",                            country:"Liban",       year:2026 },
+  { name:"Salameh Jasmine",        uni:"USJ",                           field:"Sociologie",                                     country:"Liban",       year:2026 },
+  { name:"Saoud Elio",             uni:"AUB",                           field:"Physique",                                       country:"Liban",       year:2026 },
+  { name:"Semaan Emile",           uni:"AUB",                           field:"Commerce",                                       country:"Liban",       year:2026 },
+  { name:"Zamroud Marie-Joe",      uni:"AUB",                           field:"Ingénierie industrielle",                        country:"Liban",       year:2026 },
 
   // ── AUTRES ──
   { name:"Fawaz Dimitri",          uni:"AUB (Chypre)",                  field:"Ingénierie informatique et communications",      country:"Chypre",      year:2022 },
   { name:"Fawaz Nicolas",          uni:"AUB (Chypre)",                  field:"Ingénierie industrielle",                        country:"Chypre",      year:2023 },
-  { name:"Achkar Massimo",         uni:"Queen Mary University",         field:"Finance et économie",                            country:"Royaume-Uni", year:2022 },
+  { name:"Achkar Massimo",         uni:"Queen Mary University", uni2:"King's College London", field:"Finance et économie",           country:"Royaume-Uni", year:2022 },
   { name:"Achkar Ornella",         uni:"King's College London",         field:"Ingénierie générale",                            country:"Royaume-Uni", year:2025 },
-  { name:"Sahyoun Oliver",         uni:"Université (non précisée)",     field:"Gestion des entreprises",                        country:"Autriche",    year:2023 },
+  { name:"Sahyoun Oliver",         uni:"WU Vienna",                     field:"Gestion des entreprises",                        country:"Autriche",    year:2023 },
+  { name:"Sahyoun Enzo",           uni:"IMC Krems",                     field:"Management",                                     country:"Autriche",    year:2026 },
   { name:"Ashi Leonardo",          uni:"Penn State University",         field:"Ingénierie mécanique",                           country:"États-Unis",  year:2024 },
   { name:"Jabr Alma",              uni:"Carleton College",              field:"Médecine",                                       country:"États-Unis",  year:2025 },
+  { name:"Ashi Celine",            uni:"Penn State University",         field:"Ingénierie biomédicale",                         country:"États-Unis",  year:2026 },
   { name:"Fawaz Alexis",           uni:"EPFL",                          field:"Ingénierie",                                     country:"Suisse",      year:2024 },
   { name:"Khoury Michael",         uni:"EPFL",                          field:"Ingénierie mécanique",                           country:"Suisse",      year:2024 },
   { name:"Dahdah Marya",           uni:"Glion Institute",               field:"Gestion hôtelière",                         country:"Suisse",      year:2025 },
+  { name:"Jalbout Marc",           uni:"EPFL",                          field:"Ingénierie mécanique",                           country:"Suisse",      year:2026 },
+  { name:"Waked Christopher",      uni:"EPFL",                          field:"Ingénierie mécanique",                           country:"Suisse",      year:2026 },
   { name:"Kozak Matteo",           uni:"Università di Parma",           field:"Architecture",                                   country:"Italie",      year:2024 },
+  { name:"Ghandour Mia",           uni:"Istituto Marangoni",            field:"Mode",                                           country:"Italie",      year:2026 },
   { name:"Awad Carl",              uni:"St Andrew's University",        field:"Ingénierie",                                     country:"Australie",   year:2025 },
 ];
 
@@ -658,7 +702,7 @@ const UNI_DOMAINS = {
   "Cyprus University":              "ucy.ac.cy",
   "Queen Mary University":          "qmul.ac.uk",
   "King's College London":          "kcl.ac.uk",
-  "Vienna University":              "wu.ac.at",
+  "WU Vienna":                      "wu.ac.at",
   "Penn State University":          "psu.edu",
   "Carleton College":               "carleton.edu",
   "EPFL":                           "epfl.ch",
@@ -667,6 +711,12 @@ const UNI_DOMAINS = {
   "St Andrew's University":         "st-andrews.ac.uk",
   "ESCP Business School":           "escp.eu",
   "AUB (Chypre)":                   "aub.edu.lb",
+  "University of Balamand":         "balamand.edu.lb",
+  "Institut Agro Dijon":            "institut-agro-dijon.fr",
+  "AMOS Sport Business School":     "amos-business-school.eu",
+  "ICFA Montpellier":               "icfa.fr",
+  "IMC Krems":                      "imc.ac.at",
+  "Istituto Marangoni":             "istitutomarangoni.com",
 };
 
 // Direct high-quality logo overrides for specific universities
@@ -699,7 +749,7 @@ const REGION_FLAGS = {
   "Italie":"🇮🇹","Australie":"🇦🇺","Autriche":"🇦🇹","Chypre":"🇨🇾"
 };
 
-const YEAR_COLORS = {2022:"#7a97c2",2023:"#6bab97",2024:"#c2967a",2025:"#9a8ec2"};
+const YEAR_COLORS = {2022:"#7a97c2",2023:"#6bab97",2024:"#c2967a",2025:"#9a8ec2",2026:"#c27a9a"};
 
 // ── State ──
 let activeCountry = "all";
@@ -710,6 +760,31 @@ let searchQuery   = "";
 function initials(name) {
   return name.split(" ").slice(0,2).map(w=>w[0]).join("").toUpperCase();
 }
+
+function alumniWord(n) {
+  return n === 1 ? "alumnus" : "alumni";
+}
+
+// uni2 = second university for students listed at two schools
+function uniLabel(a) {
+  return a.uni2 ? `${a.uni} + ${a.uni2}` : a.uni;
+}
+
+// ── KPIs + promotion range, computed from ALUMNI ──
+function buildKPIs() {
+  const years = ALUMNI.map(a=>a.year);
+  const unis = new Set(ALUMNI.flatMap(a => a.uni2 ? [a.uni, a.uni2] : [a.uni]));
+  const kpis = {
+    alumni:       ALUMNI.length,
+    countries:    new Set(ALUMNI.map(a=>a.country)).size,
+    universities: unis.size,
+    promotions:   new Set(years).size,
+  };
+  document.querySelectorAll("[data-kpi]").forEach(el => { el.dataset.target = kpis[el.dataset.kpi]; });
+  const range = `${Math.min(...years)} – ${Math.max(...years)}`;
+  document.querySelectorAll(".promo-range").forEach(el => { el.textContent = range; });
+}
+buildKPIs();
 
 // ── Animate counters ──
 function animateCounter(el) {
@@ -744,7 +819,7 @@ function buildRegions() {
     <div class="region-card fade-in" data-country="${country}" onclick="filterByCountry('${country}')">
       <div class="region-flag">${REGION_FLAGS[country]||"🌍"}</div>
       <div class="region-name">${country}</div>
-      <div class="region-count">${count} alumni</div>
+      <div class="region-count">${count} ${alumniWord(count)}</div>
     </div>
   `).join("");
   grid.querySelectorAll(".fade-in").forEach(el => fadeObserver.observe(el));
@@ -791,7 +866,7 @@ function filterByCountry(country) {
 function getFiltered() {
   const q = searchQuery.toLowerCase();
   return ALUMNI.filter(a => {
-    const matchSearch = !q || a.name.toLowerCase().includes(q) || a.uni.toLowerCase().includes(q) || a.field.toLowerCase().includes(q);
+    const matchSearch = !q || a.name.toLowerCase().includes(q) || uniLabel(a).toLowerCase().includes(q) || a.field.toLowerCase().includes(q);
     const matchYear   = activeYear==="all" || a.year===+activeYear;
     const matchCountry= activeCountry==="all" || a.country===activeCountry;
     return matchSearch && matchYear && matchCountry;
@@ -802,7 +877,7 @@ function renderAlumni() {
   const filtered = getFiltered();
   const grid = document.getElementById("alumniGrid");
   const count = document.getElementById("resultsCount");
-  count.innerHTML = `<span>${filtered.length}</span> alumnus${filtered.length!==1?"i":""} trouvé${filtered.length!==1?"s":""}`;
+  count.innerHTML = `<span>${filtered.length}</span> ${alumniWord(filtered.length)} trouvé${filtered.length!==1?"s":""}`;
 
   if (!filtered.length) {
     grid.innerHTML = `<div class="no-results">
@@ -827,7 +902,7 @@ function renderAlumni() {
         <div class="card-avatar">${avatarHtml}</div>
         <div>
           <div class="card-name">${a.name}</div>
-          <div class="card-uni">${a.uni}</div>
+          <div class="card-uni">${uniLabel(a)}</div>
         </div>
       </div>
       <div class="card-divider"></div>
@@ -847,15 +922,15 @@ function buildFields() {
   ALUMNI.forEach(a => {
     // Group into broader categories
     let cat = a.field;
-    if (/hôteli|hospitality|tourisme/i.test(cat)) cat = "Hôtellerie & Tourisme";
-    else if (/informatique|computer|communication/i.test(cat)) cat = "Informatique & Communications";
+    if (/hôtel|hospitality|tourisme/i.test(cat)) cat = "Hôtellerie & Tourisme";
+    else if (/informatique|computer/i.test(cat)) cat = "Informatique";
     else if (/ingéni|engineering/i.test(cat)) cat = "Ingénierie";
-    else if (/médecine|medicine|medical|infirmi|nursing|santé|pharma|dent/i.test(cat)) cat = "Médecine & Santé";
+    else if (/médecine|medicine|medical|infirmi|nursing|santé|pharma|dent|physio|kiné|orthophon/i.test(cat)) cat = "Médecine & Santé";
     else if (/architect/i.test(cat)) cat = "Architecture";
     else if (/design|animation|audiovisuel|mode|fashion|média|art/i.test(cat)) cat = "Design & Arts";
     else if (/droit|law|politique|relations internationales/i.test(cat)) cat = "Droit & Sciences politiques";
-    else if (/commerce|business|management|gestion|économ|economics|marketing|finance|comptab/i.test(cat)) cat = "Commerce & Gestion";
-    else if (/science/i.test(cat)) cat = "Sciences";
+    else if (/commerce|business|management|gestion|économ|economics|marketing|finance|comptab|entrepren|administration/i.test(cat)) cat = "Commerce & Gestion";
+    else if (/scien|^physique|chimie|biolog|sociolog|aliment|environ/i.test(cat)) cat = "Sciences";
     else cat = "Autres";
     counts[cat] = (counts[cat]||0)+1;
   });
@@ -914,7 +989,7 @@ function buildStatCharts() {
   document.getElementById("yearBars").innerHTML =
     Object.entries(yearCounts).sort((a,b)=>a[0]-b[0]).map(([y,n]) => `
       <div class="bar-item">
-        <div class="bar-meta"><span class="bar-name">Promotion ${y}</span><span class="bar-val">${n} alumni</span></div>
+        <div class="bar-meta"><span class="bar-name">Promotion ${y}</span><span class="bar-val">${n} ${alumniWord(n)}</span></div>
         <div class="bar-track"><div class="bar-fill" data-w="${Math.round(n/maxYear*100)}"></div></div>
       </div>`).join("");
 
@@ -923,7 +998,7 @@ function buildStatCharts() {
   document.getElementById("countryBars").innerHTML =
     top.map(([c,n]) => `
       <div class="bar-item">
-        <div class="bar-meta"><span class="bar-name">${REGION_FLAGS[c]||"🌍"} ${c}</span><span class="bar-val">${n} alumni</span></div>
+        <div class="bar-meta"><span class="bar-name">${REGION_FLAGS[c]||"🌍"} ${c}</span><span class="bar-val">${n} ${alumniWord(n)}</span></div>
         <div class="bar-track"><div class="bar-fill" data-w="${Math.round(n/maxCountry*100)}"></div></div>
       </div>`).join("");
 
